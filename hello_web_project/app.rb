@@ -7,4 +7,13 @@ class Application < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
   end
+
+
+  get '/hello' do
+    name = params[:name]
+
+    "Hello #{name}"
+  end
+
+
 end
