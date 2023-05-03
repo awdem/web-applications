@@ -8,31 +8,15 @@ class Application < Sinatra::Base
     register Sinatra::Reloader
   end
 
+  get '/names' do
+    string = params[:names]
 
-
+    return string.gsub(",", ", ")
+  end
 
   get '/hello' do
     return erb(:index)
   end
-
- 
-  # Work through the following in the project hello_web_project.
-
-  # Create a new route that responds to requests sent with:
-
-  # A method POST
-  # A path /submit
-
-
-  # # Request:
-  # POST /submit
-
-  # # With body parameters:
-  # name=Leo
-  # message=Hello world
-
-  # # Expected response (2OO OK):
-  # Thanks Leo, you sent this message: "Hello world"
 
   post '/submit' do
     name = params[:name]
@@ -41,6 +25,19 @@ class Application < Sinatra::Base
     "Thanks #{name}, you send this message '#{message}'"
   end
 
+  post '/submit' do
+    name = params[:name]
+    message = params[:message]
+
+    return "Thanks #{name}, you sent this message: #{message}"
+  end
+
+  post '/sort-names' do
+    params_str = params[:names]
+    params_arr = params_str.split(',')
+    params_arr.sort!
+    return params_arr.join(',')
+  end
 
 end
 
